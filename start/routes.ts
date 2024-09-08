@@ -33,12 +33,17 @@ router.group(() => {
 
         router.get("/", [DashboardController, "index"])
 
-    }).prefix('/dashboard').use(middleware.user())
+    }).prefix('/dashboard').use(middleware.user());
 
 
-    router.group(() => {
-        
-    })
+    // router.group(() => {
+    //     router.get("/", async ({ auth }) => {
+    //         const user = await auth.authenticate()
+    //         const userDetail = user.toJSON();
+    //         return userDetail.username;
+    //     })
+    // }).prefix('/test/auth');
+
 
 
 }).prefix("/api");

@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, beforeFind, beforeSave, column, hasMany } from '@adonisjs/lucid/orm'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import UserPermission from './user_permission.js'
+import hash from '@adonisjs/core/services/hash'
 
 export default class User extends BaseModel {
 
@@ -34,4 +35,11 @@ export default class User extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @beforeSave()
+  static async hashPassword(user: User) {
+    if (user.$dirty.password) {
+      user.password = await hash.make(user.password);
+    }
+  }
 }
