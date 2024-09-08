@@ -7,8 +7,8 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: root1234
       MYSQL_DATABASE: authentication
-      MARIADB_USER: sathaphon
-      MARIADB_PASSWORD: sathaphon1234
+      MARIADB_USER: exampleuser
+      MARIADB_PASSWORD: exampleuserpassword
     ports:
       - "3380:3306"
     volumes:
